@@ -2,8 +2,8 @@ $primary: #1976d2;
 $secondary: #26a69a;
 $accent: #9c27b0;
 
-$dark: #121212;
-$dark-page: #1d1d1d;
+$dark: theme('colors.black');
+$dark-page: rgba(52, 53, 65, 1);
 
 $positive: #21ba45;
 $negative: #c10015;

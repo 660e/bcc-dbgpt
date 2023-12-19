@@ -19,7 +19,7 @@ const tweak = (offset: number, height: number) => ({ height: `${height - offset}
   <q-layout view="hhh lpr fff" class="overflow-hidden">
     <!-- <q-btn @click="toggle" icon="menu" dense flat round /> -->
     <!-- <q-btn :icon="$q.dark.isActive ? 'brightness_5' : 'brightness_4'" @click="$q.dark.toggle()" dense flat round /> -->
-    <q-drawer v-model="drawer" :width="260" bordered></q-drawer>
+    <q-drawer v-model="drawer" :width="260"></q-drawer>
     <q-page-container>
       <q-page :style-fn="tweak" class="overflow-auto">
         <router-view v-slot="{ Component }">
