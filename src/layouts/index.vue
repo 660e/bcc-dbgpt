@@ -1,38 +1,30 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
-import $package from '../../package.json';
+import { useQuasar } from 'quasar';
 
 defineOptions({ name: 'app-layout' });
 
+const $q = useQuasar();
+$q.dark.set(true);
+
 const drawer = ref(true);
-const toggle = () => {
-  drawer.value = !drawer.value;
-};
+// const toggle = () => {
+//   drawer.value = !drawer.value;
+// };
 
 const tweak = (offset: number, height: number) => ({ height: `${height - offset}px` });
-
-const exclude: string[] = [];
-const include: string[] = [];
 </script>
 
 <template>
   <q-layout view="hhh lpr fff" class="overflow-hidden">
-    <q-ajax-bar />
-    <q-header>
-      <q-toolbar>
-        <q-btn @click="toggle" icon="menu" dense flat round />
-        <q-toolbar-title>{{ $package.productName }}</q-toolbar-title>
-        <q-btn :icon="$q.dark.isActive ? 'brightness_5' : 'brightness_4'" @click="$q.dark.toggle()" dense flat round />
-      </q-toolbar>
-    </q-header>
-    <q-drawer v-model="drawer" :width="200" bordered></q-drawer>
+    <!-- <q-btn @click="toggle" icon="menu" dense flat round /> -->
+    <!-- <q-btn :icon="$q.dark.isActive ? 'brightness_5' : 'brightness_4'" @click="$q.dark.toggle()" dense flat round /> -->
+    <q-drawer v-model="drawer" :width="260" bordered></q-drawer>
     <q-page-container>
       <q-page :style-fn="tweak" class="overflow-auto">
         <router-view v-slot="{ Component }">
           <transition enter-active-class="animated fadeIn" leave-active-class="animated fadeOut" mode="out-in">
-            <keep-alive :exclude="exclude" :include="include">
-              <component :is="Component" />
-            </keep-alive>
+            <component :is="Component" />
           </transition>
         </router-view>
       </q-page>
