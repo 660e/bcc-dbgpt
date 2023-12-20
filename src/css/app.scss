@@ -14,13 +14,6 @@
   background-color: $grey-7;
 }
 
-body {
-  font-family: consolas, monaco, microsoft yahei, pingfang sc;
-}
-pre {
-  margin: 0;
-}
-
-.border-primary {
-  border: 1px solid $primary;
+.q-item .q-item__section--avatar {
+  min-width: auto;
 }

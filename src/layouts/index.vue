@@ -20,15 +20,8 @@ const tweak = (offset: number, height: number) => ({ height: `${height - offset}
     </q-drawer>
     <q-page-container>
       <q-page :style-fn="tweak" class="overflow-auto relative">
-        <div
-          @click="drawer = !drawer"
-          id="target"
-          class="flex justify-center items-center absolute left-0 top-1/2 -translate-y-1/2 w-8 h-16 cursor-pointer"
-        >
+        <div @click="drawer = !drawer" class="flex justify-center items-center absolute left-0 top-1/2 -translate-y-1/2 w-8 h-16 cursor-pointer">
           <b class="w-1 h-5 bg-gray-400 rounded-sm"></b>
-          <q-tooltip target="#target" anchor="center right" self="center left" transition-show="fade" transition-hide="fade" class="bg-black">
-            <span>{{ drawer ? '收起' : '展开' }}侧边栏</span>
-          </q-tooltip>
         </div>
         <router-view v-slot="{ Component }">
           <transition enter-active-class="animated fadeIn" leave-active-class="animated fadeOut" mode="out-in">
