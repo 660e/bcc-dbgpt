@@ -2,7 +2,7 @@
 import { onMounted, ref } from 'vue';
 import { examplesApi } from '@/apis/examples';
 
-const chats = ref([]);
+const chats = ref();
 
 onMounted(() => {
   examplesApi
@@ -36,9 +36,9 @@ onMounted(() => {
       </q-item>
     </q-list>
 
-    <q-list class="flex-1">
-      <q-item class="rounded py-0 px-2 min-h-[32px]" clickable v-ripple>
-        <q-item-section>Lorem, ipsum dolor.</q-item-section>
+    <q-list class="flex-1 space-y-2">
+      <q-item v-for="chat in chats" :key="chat.id.value" class="rounded py-0 px-2 min-h-[32px]" clickable v-ripple>
+        <q-item-section>{{ chat.name.title }} {{ chat.name.first }} {{ chat.name.last }}</q-item-section>
         <q-item-section side>
           <q-icon name="more_horiz" size="xs" />
         </q-item-section>
