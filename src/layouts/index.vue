@@ -15,7 +15,7 @@ const tweak = (offset: number, height: number) => ({ height: `${height - offset}
 
 <template>
   <q-layout view="hhh lpr fff" class="overflow-hidden">
-    <q-drawer v-model="drawer" :width="260">
+    <q-drawer v-model="drawer" :bordered="!$q.dark.isActive" :width="260">
       <app-drawer />
     </q-drawer>
     <q-page-container>

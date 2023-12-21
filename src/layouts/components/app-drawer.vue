@@ -2,7 +2,11 @@
 import { onMounted, ref } from 'vue';
 import { examplesApi } from '@/apis/examples';
 
+import DialogSettings from './dialog-settings.vue';
+
 const chats = ref();
+
+const settings = ref(false);
 
 onMounted(() => {
   examplesApi
@@ -21,7 +25,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="h-full p-4 space-y-4 flex flex-col">
+  <div class="h-full p-2 space-y-4 flex flex-col">
     <q-list>
       <q-item class="rounded p-2" clickable v-ripple>
         <q-item-section class="pr-2" avatar>
@@ -29,7 +33,7 @@ onMounted(() => {
             <img src="icons/favicon-128x128.png" />
           </q-avatar>
         </q-item-section>
-        <q-item-section>New chat</q-item-section>
+        <q-item-section>新会话</q-item-section>
         <q-item-section side>
           <q-icon name="edit" size="xs" />
         </q-item-section>
@@ -53,7 +57,20 @@ onMounted(() => {
           </q-avatar>
         </q-item-section>
         <q-item-section>Min Y.</q-item-section>
+
+        <q-menu :offset="[0, 8]" class="bg-zinc-900" fit>
+          <q-list>
+            <q-item @click="settings = true" clickable v-close-popup>
+              <q-item-section avatar>
+                <q-icon name="settings" size="xs" />
+              </q-item-section>
+              <q-item-section>设置</q-item-section>
+            </q-item>
+          </q-list>
+        </q-menu>
       </q-item>
     </q-list>
   </div>
+
+  <dialog-settings v-model="settings" />
 </template>
