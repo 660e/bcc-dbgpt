@@ -2,11 +2,15 @@
 import { onMounted, ref } from 'vue';
 import { examplesApi } from '@/apis/examples';
 
+import DeleteDialog from '../dialogs/delete.vue';
+
 const current = ref();
 const chats = ref();
+const deleteDialog = ref(false);
 
 const deleteChat = chat => {
   current.value = chat;
+  deleteDialog.value = true;
 };
 
 onMounted(() => {
@@ -38,7 +42,7 @@ onMounted(() => {
           <q-menu class="w-40 bg-gray-800">
             <q-list>
               <q-item @click="deleteChat(chat)" class="text-red-500" clickable v-close-popup>
-                <q-item-section avatar>
+                <q-item-section class="pr-2" avatar>
                   <q-icon name="delete" size="xs" />
                 </q-item-section>
                 <q-item-section>删除会话</q-item-section>
@@ -56,4 +60,6 @@ onMounted(() => {
       <div class="pl-2">Min Y.</div>
     </div>
   </div>
+
+  <delete-dialog v-model="deleteDialog" :chat="current" />
 </template>
