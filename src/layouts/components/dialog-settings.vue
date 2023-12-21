@@ -14,9 +14,7 @@ const themes = reactive([
   { label: '暗色', value: 'dark' },
   { label: '亮色', value: 'light' }
 ]);
-const update = (value: string): void => {
-  $q.dark.set(value === 'dark');
-};
+const update = (value: string): void => $q.dark.set(value === 'dark');
 </script>
 
 <template>
@@ -28,8 +26,8 @@ const update = (value: string): void => {
       </div>
       <q-separator />
       <div class="h-60 flex">
-        <q-tabs v-model="tab" class="p-4" dense inline-label vertical>
-          <q-tab name="general" icon="settings" label="通用" style="padding-right: 16px" />
+        <q-tabs v-model="tab" class="p-4 w-36" align="left" dense inline-label vertical>
+          <q-tab name="general" icon="settings" label="通用" class="justify-start rounded" />
         </q-tabs>
         <q-tab-panel name="general" class="w-96">
           <div class="flex justify-between items-center">

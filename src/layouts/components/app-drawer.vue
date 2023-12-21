@@ -58,7 +58,7 @@ onMounted(() => {
         </q-item-section>
         <q-item-section>Min Y.</q-item-section>
 
-        <q-menu :offset="[0, 8]" class="bg-zinc-900" fit>
+        <q-menu :offset="[0, 8]" :class="{ 'bg-zinc-900': $q.dark.isActive }" fit>
           <q-list>
             <q-item @click="settings = true" clickable v-close-popup>
               <q-item-section avatar>
