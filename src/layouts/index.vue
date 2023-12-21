@@ -2,6 +2,8 @@
 import { ref } from 'vue';
 import { useQuasar } from 'quasar';
 
+import AppDrawer from './components/app-drawer.vue';
+
 defineOptions({ name: 'app-layout' });
 
 const $q = useQuasar();
@@ -13,8 +15,8 @@ const tweak = (offset, height) => ({ height: `${height - offset}px` });
 
 <template>
   <q-layout view="hhh lpr fff" class="overflow-hidden">
-    <q-drawer v-model="drawer" :bordered="!$q.dark.isActive" :width="260">
-      <!-- <app-drawer /> -->
+    <q-drawer v-model="drawer" :width="260">
+      <app-drawer />
     </q-drawer>
     <q-page-container>
       <q-page :style-fn="tweak" class="overflow-auto relative">
