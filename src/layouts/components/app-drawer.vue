@@ -2,8 +2,12 @@
 import { onMounted, ref } from 'vue';
 import { examplesApi } from '@/apis/examples';
 
-const chat = ref();
+const current = ref();
 const chats = ref();
+
+const deleteChat = chat => {
+  current.value = chat;
+};
 
 onMounted(() => {
   examplesApi.randomuser({ results: 5 }).then(response => {
@@ -30,7 +34,18 @@ onMounted(() => {
         v-ripple
       >
         <span>{{ chat.name.title }} {{ chat.name.first }} {{ chat.name.last }}</span>
-        <q-icon name="more_horiz" size="xs" />
+        <q-icon name="more_horiz" size="xs">
+          <q-menu class="w-40 bg-gray-800">
+            <q-list>
+              <q-item @click="deleteChat(chat)" class="text-red-500" clickable v-close-popup>
+                <q-item-section avatar>
+                  <q-icon name="delete" size="xs" />
+                </q-item-section>
+                <q-item-section>删除会话</q-item-section>
+              </q-item>
+            </q-list>
+          </q-menu>
+        </q-icon>
       </div>
     </div>
 
