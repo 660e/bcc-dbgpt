@@ -23,6 +23,11 @@ const tweak = (offset, height) => ({ height: `${height - offset}px` });
         <div @click="drawer = !drawer" class="flex justify-center items-center absolute left-0 top-1/2 -translate-y-1/2 w-8 h-16 cursor-pointer">
           <b class="w-1 h-5 bg-gray-400 rounded-sm"></b>
         </div>
+        <div
+          class="absolute bottom-2 right-2 cursor-pointer text-gray-400 bg-gray-800 border border-gray-600 rounded-full h-7 w-7 flex justify-center items-center"
+        >
+          <span>?</span>
+        </div>
         <router-view v-slot="{ Component }">
           <transition enter-active-class="animated fadeIn" leave-active-class="animated fadeOut" mode="out-in">
             <component :is="Component" />

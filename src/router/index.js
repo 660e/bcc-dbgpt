@@ -21,6 +21,12 @@ export default route(function () {
         children: [
           {
             path: '',
+            name: 'home',
+            component: () => import('@/pages/index.vue')
+          },
+          {
+            path: 'c/:id',
+            name: 'chat',
             component: () => import('@/pages/index.vue')
           }
         ]

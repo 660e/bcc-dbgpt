@@ -1,12 +1,23 @@
 <script setup>
 import { onMounted, ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { uid } from 'quasar';
 import { examplesApi } from '@/apis/examples';
 
 import DeleteDialog from '../dialogs/delete.vue';
 
+const $router = useRouter();
 const current = ref();
 const chats = ref();
 const deleteDialog = ref(false);
+
+const getChat = chat => {
+  if (chat) {
+    $router.push({ name: 'chat', params: { id: uid() } });
+  } else {
+    $router.push({ name: 'home' });
+  }
+};
 
 const deleteChat = chat => {
   current.value = chat;
@@ -14,7 +25,7 @@ const deleteChat = chat => {
 };
 
 onMounted(() => {
-  examplesApi.randomuser({ results: 5 }).then(response => {
+  examplesApi.randomuser({ results: 10 }).then(response => {
     chats.value = response.data.results;
   });
 });
@@ -22,7 +33,7 @@ onMounted(() => {
 
 <template>
   <div class="h-full flex flex-col p-2 space-y-4">
-    <div class="flex justify-between items-center p-2 cursor-pointer rounded relative hover:bg-gray-800" v-ripple>
+    <div @click="getChat()" class="flex justify-between items-center p-2 cursor-pointer rounded relative hover:bg-gray-800" v-ripple>
       <q-avatar size="md">
         <img src="icons/favicon-128x128.png" />
       </q-avatar>
@@ -34,11 +45,12 @@ onMounted(() => {
       <div
         v-for="chat in chats"
         :key="chat.id.value"
+        @click="getChat(chat)"
         class="flex justify-between items-center px-2 leading-8 cursor-pointer rounded relative hover:bg-gray-800"
         v-ripple
       >
         <span>{{ chat.name.title }} {{ chat.name.first }} {{ chat.name.last }}</span>
-        <q-icon name="more_horiz" size="xs">
+        <q-icon @click.stop name="more_horiz" size="xs">
           <q-menu class="w-40 bg-gray-800">
             <q-list>
               <q-item @click="deleteChat(chat)" class="text-red-500" clickable v-close-popup>
