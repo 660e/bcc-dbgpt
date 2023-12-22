@@ -6,6 +6,8 @@ import { examplesApi } from '@/apis/examples';
 
 import DeleteDialog from '../dialogs/delete.vue';
 
+defineOptions({ name: 'app-drawer' });
+
 const $router = useRouter();
 const current = ref();
 const chats = ref();

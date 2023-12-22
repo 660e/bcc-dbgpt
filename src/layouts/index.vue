@@ -2,7 +2,7 @@
 import { ref } from 'vue';
 import { useQuasar } from 'quasar';
 
-import AppDrawer from './components/app-drawer.vue';
+import AppDrawer from './components/drawer.vue';
 
 defineOptions({ name: 'app-layout' });
 
