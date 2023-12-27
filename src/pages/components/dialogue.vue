@@ -26,7 +26,10 @@ const $store = useChatStore();
         </div>
         <div class="flex-1">
           <div>DB-GPT</div>
-          <div>{{ message.assistant.data }}</div>
+          <div v-if="message.assistant">{{ message.assistant.data }}</div>
+          <div v-else>
+            <q-spinner-dots size="md" />
+          </div>
         </div>
       </div>
     </div>
