@@ -28,7 +28,7 @@ const deleteChat = chat => {
 
 onMounted(() => {
   examplesApi.randomuser({ results: 10 }).then(response => {
-    chats.value = response.data.results;
+    chats.value = response.results;
   });
 });
 </script>

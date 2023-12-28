@@ -2,7 +2,7 @@
 import { ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { useChatStore } from '@/stores/store';
-import { examplesApi } from '@/apis/examples';
+import { ywGptApi } from '@/apis/db-search.js';
 
 import DialogueComponent from './components/dialogue.vue';
 
@@ -16,16 +16,18 @@ const data = ref();
 const send = () => {
   loading.value = true;
   $store.send(data.value);
-  data.value = '';
 
-  examplesApi
-    .randomuser()
-    .then(response => {
-      $store.response({ type: 'text', data: response.data.results[0].email });
-    })
-    .finally(() => {
-      loading.value = false;
-    });
+  ywGptApi.smartSearch(data.value).then(gptResponse => {
+    if (gptResponse.status === 20000) {
+      if (gptResponse.content.type) {
+        $store.response(gptResponse.content);
+      } else {
+        $store.response({ type: 'text', data: 'Lorem ipsum dolor sit amet.' });
+      }
+    }
+  });
+
+  data.value = '';
 };
 
 watch(
