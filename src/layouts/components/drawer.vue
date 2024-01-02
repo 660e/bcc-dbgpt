@@ -71,7 +71,7 @@ onMounted(() => {
       <q-avatar size="md">
         <img src="icons/favicon-128x128.png" />
       </q-avatar>
-      <div class="pl-2">Min Y.</div>
+      <div class="pl-2">bcc</div>
     </div>
   </div>
 

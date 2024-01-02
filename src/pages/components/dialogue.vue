@@ -14,7 +14,7 @@ const $store = useChatStore();
           <q-avatar color="primary" text-color="white" size="sm">Y</q-avatar>
         </div>
         <div class="flex-1">
-          <div>Min Y.</div>
+          <div>bcc</div>
           <div>{{ message.user.data }}</div>
         </div>
       </div>
@@ -26,7 +26,29 @@ const $store = useChatStore();
         </div>
         <div class="flex-1">
           <div>DB-GPT</div>
-          <div v-if="message.assistant">{{ message.assistant.data }}</div>
+          <div v-if="message.assistant">
+            <!-- text | number -->
+            <div v-if="['text', 'number'].includes(message.assistant.type)">{{ message.assistant.data }}</div>
+
+            <!-- table -->
+            <div v-else-if="message.assistant.type === 'table'" class="pt-2">
+              <q-markup-table v-if="message.assistant.data.length" class="w-[720px]" separator="cell" bordered dense flat>
+                <thead>
+                  <tr>
+                    <th v-for="(value, key) in message.assistant.data[0]" :key="key" class="text-left">{{ key }}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="data in message.assistant.data" :key="data.id">
+                    <td v-for="(value, key) in data" :key="key">{{ value }}</td>
+                  </tr>
+                </tbody>
+              </q-markup-table>
+            </div>
+
+            <!-- pre -->
+            <pre v-else>{{ message.assistant.data }}</pre>
+          </div>
           <div v-else>
             <q-spinner-dots size="md" />
           </div>
